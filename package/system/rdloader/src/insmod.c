@@ -46,7 +46,7 @@ static char *parse_cmdline_module_options(const char **argv, int quote_space)
 
         fmt = "%.*s%s ";
 
-        var = strchrnul(var, '=');
+        val = strchrnul(var, '=');
 
         if (quote_space)
         {
@@ -58,7 +58,7 @@ static char *parse_cmdline_module_options(const char **argv, int quote_space)
             }
         }
 
-        optlen += sprintf(options + optlen, fmt, (int)(val - var), var, val);
+        optlen += snprintf(options + optlen, strlen(var) + 4, fmt, (int)(val - var), var, val);
     }
 
     return options;
